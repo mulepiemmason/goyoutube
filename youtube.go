@@ -14,6 +14,15 @@ import (
 	"strings"
 )
 
+func (y *Youtube) SetDefaults(format string, quality string) {
+	y.defaultFormat = format
+	y.defaultQuality = quality
+
+	// For debbugging
+	//fmt.Println(y.defaultFormat)
+	//fmt.Println(y.defaultQuality)
+}
+
 func SetLogOutput(w io.Writer) {
 	log.SetOutput(w)
 }
@@ -33,6 +42,10 @@ type Youtube struct {
 	contentLength     float64
 	totalWrittenBytes float64
 	downloadLevel     float64
+	defaultStreamUrl  string
+	defaultSig 		  string
+	defaultFormat 	  string
+	defaultQuality 	  string
 }
 
 func (y *Youtube) DecodeURL(url string) error {
@@ -55,9 +68,8 @@ func (y *Youtube) DecodeURL(url string) error {
 }
 
 func (y *Youtube) StartDownload(destFile string) error {
-	//download highest resolution on [0]
-	targetStream := y.StreamList[0]
-	url := targetStream["url"] + "&signature=" + targetStream["sig"]
+	//download default resolution
+	url := y.defaultStreamUrl + "&signature=" + y.defaultSig
 	y.log(fmt.Sprintln("Download url=", url))
 
 	y.log(fmt.Sprintln("Download to file=", destFile))
@@ -120,6 +132,11 @@ func (y *Youtube) parseVideoInfo() error {
 			"title":   answer["title"][0],
 			"author":  answer["author"][0],
 		})
+
+		if y.defaultQuality == streamQry["quality"][0] && y.defaultFormat == streamQry["type"][0] {
+			y.defaultStreamUrl = streamQry["url"][0]
+			y.defaultSig = sig
+		}
 		y.log(fmt.Sprintf("Stream found: quality '%s', format '%s'", streamQry["quality"][0], streamQry["type"][0]))
 	}
 
