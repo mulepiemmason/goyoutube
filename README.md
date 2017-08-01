@@ -49,6 +49,8 @@ func main() {
 
 	// NewYoutube(debug) if debug parameter will set true we can log of messages
 	y := NewYoutube(true)
+	// Set the default resolution
+	y.SetDefaults("video/mp4; codecs=\"avc1.42001E, mp4a.40.2\"", "medium")
 	y.DecodeURL("https://www.youtube.com/watch?v=rFejpH_tAHM")
 	y.StartDownload(currentFile)
 }
