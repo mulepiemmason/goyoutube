@@ -8,6 +8,8 @@ Download Youtube Video in Golang
 This package is a Youtube video download package, for more detail refer [https://github.com/rg3/youtube-dl](https://github.com/rg3/youtube-dl) for more download option.
 
 
+
+
 How it works
 ---------------
 
@@ -24,7 +26,7 @@ How it works
 
 Install
 ---------------
-`go get github.com/kkdai/youtube`
+`go get github.com/mulepiemmason/goyoutube`
 
 
 Usage
@@ -40,7 +42,7 @@ import (
 	"os"
 	"path/filepath"
 
-	. "github.com/kkdai/youtube"
+	. "github.com/mulepiemmason/goyoutube"
 )
 
 func main() {
@@ -72,11 +74,6 @@ Inspired
 
 - [https://github.com/lepidosteus/youtube-dl](https://github.com/lepidosteus/youtube-dl)
 - [拆解 Youtube 影片下載位置](http://hkgoldenmra.blogspot.tw/2013/05/youtube.html)
-
-Project52
----------------
-
-It is one of my [project 52](https://github.com/kkdai/project52).
 
 
 License
